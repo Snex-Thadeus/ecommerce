@@ -6,6 +6,18 @@ from .models import *
 from .utils import cookieCart, cartData, guestOrder
 
 
+def home(request):
+    return render(request, 'store/home.html')
+
+
+def details(request):
+    product = Product.objects.all()
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {'product': product, 'cartItems': cartItems}
+    return render(request, 'store/product-details.html', context)
+
+
 def store(request):
     data = cartData(request)
 
@@ -96,6 +108,5 @@ def processOrder(request):
     return JsonResponse('Payment submitted..', safe=False)
 
 
-def login(request):
-    context = {}
-    return render(request, 'store/login.html', context)
+
+

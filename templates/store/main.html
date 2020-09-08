@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-	<title>E-commerce</title>
+	<title>SnexStore | E-Commerce Website</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
@@ -63,8 +63,8 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="{% url 'store' %}">E-commerce</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+	  <a class="navbar-brand" href="{% url 'home' %}">E-commerce</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -72,17 +72,23 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
 	      </li>
 
 	    </ul>
 	    <div class="form-inline my-2 my-lg-0">
-	     	<a href="{% url 'login' %}"class="btn btn-warning">Login</a>
+	     	{%if user.is_authenticated %}
+				<li>Hello, {{user.username}}</li>
+				<li><a href="{% url 'logout' %}">Log Out</a></li>
+				{% else %}
+				<li><a href="{% url 'register' %}">Account</a></li>
+			{% endif %}
 
 	     	<a href="{% url 'cart' %}">
 	    		<img  id="cart-icon" src="{% static 'images/cart.png' %}">
 	    	</a>
 	    	<p id="cart-total">{{cartItems}}</p>
+
 
 	    </div>
 	  </div>
@@ -104,17 +110,66 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+<!--- Footer --->
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col-1">
+					<h3>Download Our App</h3>
+					<p>Download App for Android and IOS mobile phones</p>
+					<div class="app-logo">
+						<img src="{% static 'pics/play-store.png' %}">
+						<img src="{% static 'pics/app-store.png' %}">
+					</div>
+				</div>
+				<div class="footer-col-2">
+					<img src="{% static 'pics/log.jpg' %}">
+					<p>It is understood Chelsea had an opening bid of £15m turned down by Rennesbut are keen to table an improved offer in due course.</p>
+				</div>
+				<div class="footer-col-3">
+					<h3>Useful Links</h3>
+					<ul>
+						<li>Coupons</li>
+						<li>Blog Post</li>
+						<li>Return Policy</li>
+						<li>Join Affiliates</li>
+					</ul>
+				</div>
+				<div class="footer-col-4">
+					<h3>Follow Us</h3>
+					<ul>
+						<li>Facebook</li>
+						<li>Twitter</li>
+						<li>Instagram</li>
+						<li>Youtube</li>
+					</ul>
+				</div>
+			</div>
+			<div class="arrow">
+			<a href="{% url 'home' %}" title="Back to Top"><span class="fas fa-angle-up"></span></a>
+			</div>
+			<hr>
+			<p class="copyright">Copyright @2020 - <a href="https://www.facebook.com/lwande.thaddeus">Snex_Tech_Ltd.</a></p>
+		</div>
+	</div>
+
+	<!--- Js fo toggle menu --->
+	<script>
+		var MenuItems = document.getElementById("MenuItems");
+
+		MenuItems.style.maxHeight = "0px";
+
+		function menutoggle(){
+			if(MenuItems.style.maxHeight == "0px")
+				{
+					MenuItems.style.maxHeight = "200px";
+				}
+			else
+				{
+					MenuItems.style.maxHeight = "0px";
+				}
+		}
+	</script>
 </body>
-
-<!-- Footer -->
-<footer class="page-footer font-small blue">
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://www.facebook.com/lwande.thaddeus"> Snex_Tech</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
 </html>

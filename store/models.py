@@ -13,6 +13,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=False)
+    description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
@@ -83,3 +84,5 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
